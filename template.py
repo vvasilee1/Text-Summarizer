@@ -25,22 +25,20 @@ list_of_files = [
     "Dockerfile",
     "requirements.txt",
     "setup.py",
-    "research/trials.ipynb",
+    "research/trials.ipynb"
 
        
 
 ]
 for filepath in list_of_files:
-        filepath = Path(filepath)
-        filedir,filename = os.path.split(filepath)
-        if not os.path.exists(filedir):
-                os.makedirs(filedir,exist_ok=True)
-                logging.info(f"Created directory: {filedir} for the file: {filename}")
-        
-        if not os.path.exists(filepath) or os.path.getsize(filepath) == 0:
-                with open(filepath, "w") as f:
-                        pass
-                logging.info(f"Created empty file: {filepath}")
+    filepath =Path(filepath)
+    filedir,filename = os.path.split(filepath)
+    if filedir != "":
+        os.makedirs(filedir,exist_ok=True)
+        logging.info(f"Created directory: {filedir} for file: {filename}")
+    if not os.path.exists(filepath) or os.path.getsize(filepath) == 0:
+        with open(filepath, "w") as f:
+            logging.info(f"Creating empty file: {filepath}")
 
-        else:
-                logging.info(f"{filename} already exists ")
+    else:
+        logging.info(f"{filename} already exists ")
