@@ -4,6 +4,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 from textSummarizer.entity import ModelTrainerConfig
 from datasets import load_dataset, load_from_disk
 import torch
+import os
 
 
 class ModelTrainer:
@@ -44,3 +45,8 @@ class ModelTrainer:
                   eval_dataset=dataset_samsum_pt["validation"])
 
         trainer.train()
+
+        ## Save model
+        model_pegasus.save_pretrained(os.path.join(self.config.root_dir,"pegasus-samsum-model"))
+        ## Save tokenizer
+        tokenizer.save_pretrained(os.path.join(self.config.root_dir,"tokenizer"))
